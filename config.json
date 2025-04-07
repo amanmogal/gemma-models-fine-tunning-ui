@@ -1,0 +1,35 @@
+{
+  "app": {
+    "title": "Gemma Fine-tuning UI",
+    "description": "A user-friendly interface for fine-tuning Google's Gemma language models",
+    "theme": "light",
+    "debug": false
+  },
+  "models": {
+    "default_model": "google/gemma-2b",
+    "cache_dir": "./model_cache"
+  },
+  "training": {
+    "output_dir": "./results",
+    "default_batch_size": 8,
+    "default_learning_rate": 2e-05,
+    "default_epochs": 3,
+    "default_method": "LoRA",
+    "tensorboard_dir": "./logs"
+  },
+  "data": {
+    "upload_dir": "./uploads",
+    "cache_dir": "./data_cache",
+    "examples_dir": "./examples"
+  },
+  "export": {
+    "export_dir": "./exported_models",
+    "formats": [
+      "HuggingFace",
+      "ONNX",
+      "TensorFlow",
+      "PyTorch",
+      "GGUF"
+    ]
+  }
+}
