@@ -10,12 +10,15 @@ def create_info_box(title: str, content: str) -> gr.Blocks:
         gr.Markdown(content)
     return gr.Box()
 
-def create_file_upload_component(accepted_types: List[str], label: str, description: str):
-    """Create a file upload component with specified parameters."""
+def create_file_upload_component(
+    label="Upload File",
+    file_types=None,
+    file_count="single"
+):
     return gr.File(
-        file_types=accepted_types,
         label=label,
-        info=description
+        file_types=file_types,
+        file_count=file_count,
     )
 
 def create_model_selector():

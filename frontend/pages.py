@@ -72,7 +72,7 @@ def create_home_page() -> None:
                 - Text classification
                 - Text generation
                 - Question answering
-                - Summarization
+                - Summarizationst
                 """)
 
 def create_dataset_page(state: gr.State) -> Dict[str, Any]:
@@ -85,9 +85,9 @@ def create_dataset_page(state: gr.State) -> Dict[str, Any]:
             with gr.Column(scale=2):
                 # File upload section
                 upload_file = create_file_upload_component(
-                    accepted_types=[".csv", ".jsonl", ".txt", ".xlsx"],
+                    file_types=[".csv", ".jsonl", ".txt", ".xlsx"],
                     label="Upload Dataset",
-                    description="Upload your dataset file (CSV, JSONL, TXT, or XLSX)"
+                    
                 )
                 
                 # Format selection
@@ -376,7 +376,7 @@ def create_training_page(state: gr.State) -> Dict[str, Any]:
                     
                     config_display = gr.JSON(
                         label="Current Configuration",
-                        value=state.get("model_config", {})
+                        value=state.value.get("model_config", {})
                     )
             
             with gr.Column(scale=2):
@@ -427,10 +427,10 @@ def create_training_page(state: gr.State) -> Dict[str, Any]:
         
         # Training handlers
         def start_training():
-            if not state.get("model_config"):
+            if not state.value.get("model_config"):
                 return "Error: No model configuration found. Please configure the model first.", "<div style='padding: 10px; border-radius: 5px; background-color: #ffebee;'><p><b>Error:</b> No model configuration found</p></div>"
             
-            if not state.get("dataset"):
+            if not state.value.get("dataset"):
                 return "Error: No dataset found. Please upload and process a dataset first.", "<div style='padding: 10px; border-radius: 5px; background-color: #ffebee;'><p><b>Error:</b> No dataset found</p></div>"
             
             # Get configuration from state
@@ -497,7 +497,7 @@ def create_training_page(state: gr.State) -> Dict[str, Any]:
         )
         
         def generate_sample(input_text):
-            if not state.get("trained_model"):
+            if not state.value.get("trained_model"):
                 return "Error: No trained model available. Please train the model first."
             
             try:
@@ -598,7 +598,7 @@ def create_evaluation_page(state: gr.State) -> Dict[str, Any]:
         
         # Implement evaluation handler
         def evaluate_model_handler(dataset_choice, metrics, custom_dataset=None):
-            if not state.get("model"):
+            if not state.value.get("model"):
                 return "Error: No model available. Please load or train a model first.", None, None
             
             try:
@@ -686,7 +686,7 @@ def create_evaluation_page(state: gr.State) -> Dict[str, Any]:
         
         # Sample generation handler
         def sample_generation_handler(input_text):
-            if not state.get("model"):
+            if not state.value.get("model"):
                 return "Error: No model available. Please load or train a model first."
             
             try:
